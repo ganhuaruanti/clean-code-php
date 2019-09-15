@@ -61,11 +61,9 @@
 
 ## 翻譯說明
 
-翻譯完成度100%，最後更新時間2017-12-25。本文由 php-cpm 基於 [yangweijie版本](https://github.com/yangweijie/clean-code-php) 的[clean-code-php](https://github.com/jupeter/clean-code-php)翻譯並同步大量原文內容。
+從 [php-cpm 版本](https://github.com/php-cpm/clean-code-php)的[clean-code-php](https://github.com/jupeter/clean-code-php) 簡繁轉換過後，將用詞修正成更符合繁體中文的用法。
 
-原文更新頻率較高，我的翻譯方法是直接用文本比較工具逐行對比。優先保證文字內容是最新的，再逐步提升翻譯質量。
-
-閱讀過程中如果遇到各種鏈接失效、內容老舊、術語使用錯誤和其他翻譯錯誤等問題，歡迎大家積極提交PR。
+閱讀過程中，如果遇到各種連接失效、內容老舊、術語使用錯誤和其他翻譯錯誤等問題，歡迎大家積極提交 PR。
 
 ## **變數**
 
