@@ -41,7 +41,7 @@
   7. [類的SOLID原則 SOLID](#solid)
      * [S: 單一職責原則 Single Responsibility Principle (SRP)](#單一職責原則)
      * [O: 開閉原則 Open/Closed Principle (OCP)](#開閉原則)
-     * [L: 裡氏替換原則 Liskov Substitution Principle (LSP)](#裡氏替換原則)
+     * [L: 里氏替換原則 Liskov Substitution Principle (LSP)](#里氏替換原則)
      * [I: 接口隔離原則 Interface Segregation Principle (ISP)](#接口隔離原則)
      * [D: 依賴倒置原則 Dependency Inversion Principle (DIP)](#依賴倒置原則)
   8. [別寫重複代碼 (DRY)](#別寫重複代碼-dry)
@@ -1707,7 +1707,7 @@ class HttpRequester
 
 **[⬆ 返回頂部](#目錄)**
 
-### 裡氏替換原則
+### 里氏替換原則
 
 Liskov Substitution Principle (LSP)
 
