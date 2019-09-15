@@ -4,7 +4,7 @@
 
   1. [介紹](#介紹)
   2. [變數](#變數)
-     * [使用見字知意的變數名](#使用見字知意的變數名)
+     * [使用容易理解的變數名](#使用容易理解的變數名)
      * [同一個實體要用相同的變數名](#同一個實體要用相同的變數名)
      * [使用便於搜索的名稱 (part 1)](#使用便於搜索的名稱-part-1)
      * [使用便於搜索的名稱 (part 2)](#使用便於搜索的名稱-part-2)
@@ -69,15 +69,15 @@
 
 ## **變數**
 
-### 使用見字知意的變數名
+### 使用容易理解的變數名
 
-**壞:**
+**壞：**
 
 ```php
 $ymdstr = $moment->format('y-m-d');
 ```
 
-**好:**
+**好：**
 
 ```php
 $currentDate = $moment->format('y-m-d');
@@ -87,7 +87,7 @@ $currentDate = $moment->format('y-m-d');
 
 ### 同一個實體要用相同的變數名
 
-**壞:**
+**壞：**
 
 ```php
 getUserInfo();
@@ -96,7 +96,7 @@ getUserRecord();
 getUserProfile();
 ```
 
-**好:**
+**好：**
 
 ```php
 getUser();
@@ -110,13 +110,13 @@ getUser();
 命名變數時如果沒有有意義、不好理解，那就是在傷害讀者。
 請讓你的代碼便於搜索。
 
-**壞:**
+**壞：**
 ```php
 // 448 ™ 干啥的?
 $result = $serializer->serialize($data, 448);
 ```
 
-**好:**
+**好：**
 
 ```php
 $json = $serializer->serialize($data, JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
@@ -124,7 +124,7 @@ $json = $serializer->serialize($data, JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT
 
 ### 使用便於搜索的名稱 (part 2)
 
-**壞:**
+**壞：**
 
 ```php
 class User
@@ -142,7 +142,7 @@ if ($user->access & 4) {
 $user->access ^= 2;
 ```
 
-**好:**
+**好：**
 
 ```php
 class User
@@ -168,7 +168,7 @@ $user->access ^= User::ACCESS_CREATE;
 
 ### 使用自解釋型變數
 
-**壞:**
+**壞：**
 
 ```php
 $address = 'One Infinite Loop, Cupertino 95014';
@@ -178,7 +178,7 @@ preg_match($cityZipCodeRegex, $address, $matches);
 saveCityZipCode($matches[1], $matches[2]);
 ```
 
-**不錯:**
+**不錯：**
 
 好一些，但強依賴於正則表達式的熟悉程度
 
@@ -191,7 +191,7 @@ preg_match($cityZipCodeRegex, $address, $matches);
 saveCityZipCode($city, $zipCode);
 ```
 
-**好:**
+**好：**
 
 使用帶名字的子規則，不用懂正則也能看的懂
 
@@ -209,7 +209,7 @@ saveCityZipCode($matches['city'], $matches['zipCode']);
 
 太多的if else語句通常會導致你的代碼難以閱讀，直白優於隱晦
 
-**糟糕:**
+**糟糕：**
 
 ```php
 function isShopOpen($day): bool
@@ -235,7 +235,7 @@ function isShopOpen($day): bool
 }
 ```
 
-**好:**
+**好：**
 
 ```php
 function isShopOpen(string $day): bool
@@ -256,7 +256,7 @@ function isShopOpen(string $day): bool
 
 ### 避免深層嵌套，盡早返回 (part 2)
 
-**糟糕的:**
+**糟糕的：**
 
 ```php
 function fibonacci(int $n)
@@ -277,7 +277,7 @@ function fibonacci(int $n)
 }
 ```
 
-**好:**
+**好：**
 
 ```php
 function fibonacci(int $n): int
@@ -301,7 +301,7 @@ function fibonacci(int $n): int
 別讓讀你的代碼的人猜你寫的變數是什麼意思。
 寫清楚好過模糊不清。
 
-**壞:**
+**壞：**
 
 ```php
 $l = ['Austin', 'New York', 'San Francisco'];
@@ -318,7 +318,7 @@ for ($i = 0; $i < count($l); $i++) {
 }
 ```
 
-**好:**
+**好：**
 
 ```php
 $locations = ['Austin', 'New York', 'San Francisco'];
@@ -339,7 +339,7 @@ foreach ($locations as $location) {
 
 如果從你的類名、對像名已經可以得知一些信息，就別再在變數名裡重複。
 
-**壞:**
+**壞：**
 
 ```php
 class Car
@@ -352,7 +352,7 @@ class Car
 }
 ```
 
-**好:**
+**好：**
 
 ```php
 class Car
@@ -369,7 +369,7 @@ class Car
 
 ### 合理使用參數默認值，沒必要在方法裡再做默認值檢測
 
-**不好:**
+**不好：**
 
 不好，`$breweryName` 可能為 `NULL`.
 
@@ -380,7 +380,7 @@ function createMicrobrewery($breweryName = 'Hipster Brew Co.'): void
 }
 ```
 
-**還行:**
+**還行：**
 
 比上一個好理解一些，但最好能控制變數的值
 
@@ -392,7 +392,7 @@ function createMicrobrewery($name = null): void
 }
 ```
 
-**好:**
+**好：**
 
 如果你的程序只支持 PHP 7+, 那你可以用 [type hinting](http://php.net/manual/en/functions.arguments.php#functions.arguments.type-declaration) 保證變數 `$breweryName` 不是 `NULL`.
 
@@ -409,7 +409,7 @@ function createMicrobrewery(string $breweryName = 'Hipster Brew Co.'): void
 
 ### [使用恆等式](http://php.net/manual/en/language.operators.comparison.php)
 
-**不好:**
+**不好：**
 
 簡易對比會將字符串轉為整形
 
@@ -425,7 +425,7 @@ if( $a != $b ) {
 對比 $a != $b 返回了 `FALSE` 但應該返回 `TRUE` !
 字符串 '42' 跟整數 42 不相等
 
-**好:**
+**好：**
 
 使用恆等判斷檢查類型和數據
 
@@ -450,7 +450,7 @@ The comparison `$a !== $b` returns `TRUE`.
 
 無參數是理想情況。1個或2個都可以，最好避免3個。再多就需要加固了。通常如果你的函式有超過兩個參數，說明他要處理的事太多了。 如果必須要傳入很多數據，建議封裝一個高級別對像作為參數。
 
-**壞:**
+**壞：**
 
 ```php
 function createMenu(string $title, string $body, string $buttonText, bool $cancellable): void
@@ -459,7 +459,7 @@ function createMenu(string $title, string $body, string $buttonText, bool $cance
 }
 ```
 
-**好:**
+**好：**
 
 ```php
 class MenuConfig
@@ -488,7 +488,7 @@ function createMenu(MenuConfig $config): void
 
 這是迄今為止軟件工程裡最重要的一個規則。當一個函式做超過一件事的時候，他們就難於實現、測試和理解。當你把一個函式拆分到只剩一個功能時，他們就容易被重構，然後你的代碼讀起來就更清晰。如果你光遵循這條規則，你就領先於大多數開發者了。
 
-**壞:**
+**壞：**
 
 ```php
 function emailClients(array $clients): void
@@ -502,7 +502,7 @@ function emailClients(array $clients): void
 }
 ```
 
-**好:**
+**好：**
 
 ```php
 function emailClients(array $clients): void
@@ -528,7 +528,7 @@ function isClientActive(int $client): bool
 
 ### 函式名應體現他做了什麼事
 
-**壞:**
+**壞：**
 
 ```php
 class Email
@@ -546,7 +546,7 @@ $message = new Email(...);
 $message->handle();
 ```
 
-**好:**
+**好：**
 
 ```php
 class Email 
@@ -571,7 +571,7 @@ $message->send();
 當你抽像層次過多時時，函式處理的事情太多了。需要拆分功能來提高可重用性和易用性，以便簡化測試。
 （譯者注：這裡從示例代碼看應該是指嵌套過多）
 
-**壞:**
+**壞：**
 
 ```php
 function parseBetterJSAlternative(string $code): void
@@ -599,7 +599,7 @@ function parseBetterJSAlternative(string $code): void
 }
 ```
 
-**壞:**
+**壞：**
 
 我們把一些方法從循環中提取出來，但是`parseBetterJSAlternative()`方法還是很復雜，而且不利於測試。
 
@@ -641,7 +641,7 @@ function parseBetterJSAlternative(string $code): void
 }
 ```
 
-**好:**
+**好：**
 
 最好的解決方案是把 `parseBetterJSAlternative()`方法的依賴移除。
 
@@ -709,7 +709,7 @@ class BetterJSAlternative
 
 flag就是在告訴大家，這個方法裡處理很多事。前面剛說過，一個函式應當只做一件事。 把不同flag的代碼拆分到多個函式裡。
 
-**壞:**
+**壞：**
 ```php
 function createFile(string $name, bool $temp = false): void
 {
@@ -721,7 +721,7 @@ function createFile(string $name, bool $temp = false): void
 }
 ```
 
-**好:**
+**好：**
 
 ```php
 function createFile(string $name): void
@@ -744,7 +744,7 @@ function createTempFile(string $name): void
 
 重點是避免常見陷阱比如對像間共享無結構的數據，使用可以寫入任何的可變數據類型，不集中處理副作用發生的地方。如果你做了這些你就會比大多數程序員快樂。
 
-**壞:**
+**壞：**
 
 ```php
 // Global variable referenced by following function.
@@ -763,7 +763,7 @@ splitIntoFirstAndLastName();
 var_dump($name); // ['Ryan', 'McDermott'];
 ```
 
-**好:**
+**好：**
 
 ```php
 function splitIntoFirstAndLastName(string $name): array
@@ -786,7 +786,7 @@ var_dump($newName); // ['Ryan', 'McDermott'];
 如果你想配置一個數組，你可能會寫一個全局函式`config()`，但是他可能
 和試著做同樣事的其他類庫衝突。
 
-**壞:**
+**壞：**
 
 ```php
 function config(): array
@@ -797,7 +797,7 @@ function config(): array
 }
 ```
 
-**好:**
+**好：**
 
 ```php
 class Configuration
@@ -838,7 +838,7 @@ $configuration = new Configuration([
 
 這裡有一篇非常好的討論單例模式的[根本問題((http://misko.hevery.com/2008/08/25/root-cause-of-singletons/)的文章，是[Misko Hevery](http://misko.hevery.com/about/) 寫的。
 
-**壞:**
+**壞：**
 
 ```php
 class DBConnection
@@ -865,7 +865,7 @@ class DBConnection
 $singleton = DBConnection::getInstance();
 ```
 
-**好:**
+**好：**
 
 ```php
 class DBConnection
@@ -891,7 +891,7 @@ $connection = new DBConnection($dsn);
 
 ### 封裝條件語句
 
-**壞:**
+**壞：**
 
 ```php
 if ($article->state === 'published') {
@@ -899,7 +899,7 @@ if ($article->state === 'published') {
 }
 ```
 
-**好:**
+**好：**
 
 ```php
 if ($article->isPublished()) {
@@ -911,7 +911,7 @@ if ($article->isPublished()) {
 
 ### 避免用反義條件判斷
 
-**壞:**
+**壞：**
 
 ```php
 function isDOMNodeNotPresent(\DOMNode $node): bool
@@ -925,7 +925,7 @@ if (!isDOMNodeNotPresent($node))
 }
 ```
 
-**好:**
+**好：**
 
 ```php
 function isDOMNodePresent(\DOMNode $node): bool
@@ -949,7 +949,7 @@ if (isDOMNodePresent($node)) {
  當你有很多含有`if`語句的類和函式時,你的函式做了不止一件事。
  記住，只做一件事。
 
-**壞:**
+**壞：**
 
 ```php
 class Airplane
@@ -970,7 +970,7 @@ class Airplane
 }
 ```
 
-**好:**
+**好：**
 
 ```php
 interface Airplane
@@ -1019,7 +1019,7 @@ PHP是弱類型的,這意味著你的函式可以接收任何類型的參數。
 有時候你為這自由所痛苦並且在你的函式漸漸嘗試類型檢查。
 有很多方法去避免這麼做。第一種是統一API。
 
-**壞:**
+**壞：**
 
 ```php
 function travelToTexas($vehicle): void
@@ -1032,7 +1032,7 @@ function travelToTexas($vehicle): void
 }
 ```
 
-**好:**
+**好：**
 
 ```php
 function travelToTexas(Vehicle $vehicle): void
@@ -1050,7 +1050,7 @@ function travelToTexas(Vehicle $vehicle): void
 提供了基於標准PHP語法的靜態類型。 手動檢查類型的問題是做好了需要好多的廢話，好像為了安全就可以不顧損失可讀性。
 保持你的PHP 整潔，寫好測試，做好代碼回顧。做不到就用PHP嚴格類型聲明和嚴格模式來確保安全。
 
-**壞:**
+**壞：**
 
 ```php
 function combine($val1, $val2): int
@@ -1063,7 +1063,7 @@ function combine($val1, $val2): int
 }
 ```
 
-**好:**
+**好：**
 
 ```php
 function combine(int $val1, int $val2): int
@@ -1079,7 +1079,7 @@ function combine(int $val1, int $val2): int
 僵屍代碼和重複代碼一樣壞。沒有理由保留在你的代碼庫中。如果從來沒被使用過，就刪掉！
 因為還在代碼版本庫裡，因此很安全。
 
-**壞:**
+**壞：**
 ```php
 function oldRequestModule(string $url): void
 {
@@ -1095,7 +1095,7 @@ $request = newRequestModule($requestUrl);
 inventoryTracker('apples', $request, 'www.inventory-awesome.io');
 ```
 
-**好:**
+**好：**
 
 ```php
 function requestModule(string $url): void
@@ -1125,7 +1125,7 @@ inventoryTracker('apples', $request, 'www.inventory-awesome.io');
 
 此外，這樣的方式也符合OOP開發中的[開閉原則](#開閉原則)
 
-**壞:**
+**壞：**
 
 ```php
 class BankAccount
@@ -1139,7 +1139,7 @@ $bankAccount = new BankAccount();
 $bankAccount->balance -= 100;
 ```
 
-**好:**
+**好：**
 
 ```php
 class BankAccount
@@ -1192,7 +1192,7 @@ $balance = $bankAccount->getBalance();
 
 可以讀一讀這篇 [博客文章](http://fabien.potencier.org/pragmatism-over-theory-protected-vs-private.html) ，[Fabien Potencier](https://github.com/fabpot)寫的.
 
-**壞:**
+**壞：**
 
 ```php
 class Employee
@@ -1209,7 +1209,7 @@ $employee = new Employee('John Doe');
 echo 'Employee name: '.$employee->name; // Employee name: John Doe
 ```
 
-**好:**
+**好：**
 
 ```php
 class Employee
@@ -1249,7 +1249,7 @@ echo 'Employee name: '.$employee->getName(); // Employee name: John Doe
 2. 你可以復用基類的代碼（人類可以像動物一樣移動）
 3. 你想通過修改基類對所有派生類做全局的修改（當動物移動時，修改她們的能量消耗）
 
-**糟糕的:**
+**糟糕的：**
 
 ```php
 class Employee 
@@ -1288,7 +1288,7 @@ class EmployeeTaxData extends Employee
 }
 ```
 
-**好:**
+**好：**
 
 ```php
 class EmployeeTaxData 
@@ -1350,7 +1350,7 @@ more often it comes at some costs:
 了解更多請閱讀 [連貫接口為什麼不好](https://ocramius.github.io/blog/fluent-interfaces-are-evil/)
 ，作者 [Marco Pivetta](https://github.com/Ocramius).
 
-**壞:**
+**壞：**
 
 ```php
 class Car
@@ -1396,7 +1396,7 @@ $car = (new Car())
   ->dump();
 ```
 
-**好:**
+**好：**
 
 ```php
 class Car
@@ -1449,7 +1449,7 @@ The only condition is that your class should implement an interface and no other
 
 For more informations you can read [the blog post](https://ocramius.github.io/blog/when-to-declare-classes-final/) on this topic written by [Marco Pivetta (Ocramius)](https://ocramius.github.io/).
 
-**Bad:**
+**Bad：**
 
 ```php
 final class Car
@@ -1471,7 +1471,7 @@ final class Car
 }
 ```
 
-**Good:**
+**Good：**
 
 ```php
 interface Vehicle
@@ -1526,7 +1526,7 @@ Single Responsibility Principle (SRP)
 這是因為，當有很多方法在類中時，修改其中一處，你很難知
 曉在代碼庫中哪些依賴的模塊會被影響到。
 
-**壞:**
+**壞：**
 
 ```php
 class UserSettings
@@ -1552,7 +1552,7 @@ class UserSettings
 }
 ```
 
-**好:**
+**好：**
 
 ```php
 class UserAuth 
@@ -1600,7 +1600,7 @@ Open/Closed Principle (OCP)
 應該對擴展開放，對修改關閉。" 然而這句話意味著什麼呢？這個原則大體上表示你
 應該允許在不改變已有代碼的情況下增加新的功能
 
-**壞:**
+**壞：**
 
 ```php
 abstract class Adapter
@@ -1665,7 +1665,7 @@ class HttpRequester
 }
 ```
 
-**好:**
+**好：**
 
 ```php
 interface Adapter
@@ -1722,7 +1722,7 @@ Liskov Substitution Principle (LSP)
 上講，正方形是一種長方形，但是當你的模型通過繼承使用了"is-a"
 的關系時，就不對了。
 
-**壞:**
+**壞：**
 
 ```php
 class Rectangle
@@ -1775,7 +1775,7 @@ foreach ($rectangles as $rectangle) {
 }
 ```
 
-**好:**
+**好：**
 
 最好是將這兩種四邊形分別對待，用一個適合兩種類型的更通用子類型來代替。
 
@@ -1845,7 +1845,7 @@ Interface Segregation Principle (ISP)
 為了方便不會要求調用方去設置大量的選項，因為在通常他們不需要所有的
 設置項。使設置項可選有助於我們避免產生"胖接口"
 
-**壞:**
+**壞：**
 
 ```php
 interface Employee
@@ -1882,7 +1882,7 @@ class RobotEmployee implements Employee
 }
 ```
 
-**好:**
+**好：**
 
 不是每一個工人都是雇員，但是每一個雇員都是一個工人
 
@@ -1939,7 +1939,7 @@ Dependency Inversion Principle (DIP)
 與低階模塊的實現細節和創建分離。可以使用依賴注入（DI）這種方式來實現它。最大的好處
 是它使模塊之間解耦。耦合會導致你難於重構，它是一種非常糟糕的的開發模式。
 
-**壞:**
+**壞：**
 
 ```php
 class Employee
@@ -1974,7 +1974,7 @@ class Manager
 }
 ```
 
-**好:**
+**好：**
 
 ```php
 interface Employee
@@ -2038,7 +2038,7 @@ class Manager
 如果你能設計一個合理的抽像，那就這麼干！別寫重複代碼，否則你會發現
 任何時候當你想修改一個邏輯時你必須修改多個地方。
 
-**壞:**
+**壞：**
 
 ```php
 function showDeveloperList(array $developers): void
@@ -2074,7 +2074,7 @@ function showManagerList(array $managers): void
 }
 ```
 
-**好:**
+**好：**
 
 ```php
 function showList(array $employees): void
@@ -2094,7 +2094,7 @@ function showList(array $employees): void
 }
 ```
 
-**極好:**
+**極好：**
 
 最好讓代碼緊湊一點
 
@@ -2117,24 +2117,24 @@ function showList(array $employees): void
 
 其他語言的翻譯:
 
-* :cn: **Chinese:**
+* :cn: **Chinese：**
    * [php-cpm/clean-code-php](https://github.com/php-cpm/clean-code-php)
-* :ru: **Russian:**
+* :ru: **Russian：**
    * [peter-gribanov/clean-code-php](https://github.com/peter-gribanov/clean-code-php)
-* :es: **Spanish:**
+* :es: **Spanish：**
    * [fikoborquez/clean-code-php](https://github.com/fikoborquez/clean-code-php)
-* :brazil: **Portuguese:**
+* :brazil: **Portuguese：**
    * [fabioars/clean-code-php](https://github.com/fabioars/clean-code-php)
    * [jeanjar/clean-code-php](https://github.com/jeanjar/clean-code-php/tree/pt-br)
-* :thailand: **Thai:**
+* :thailand: **Thai：**
    * [panuwizzle/clean-code-php](https://github.com/panuwizzle/clean-code-php)
-* :fr: **French:**
+* :fr: **French：**
    * [errorname/clean-code-php](https://github.com/errorname/clean-code-php)
 * :vietnam: **Vietnamese**
    * [viethuongdev/clean-code-php](https://github.com/viethuongdev/clean-code-php)
-* :kr: **Korean:**
+* :kr: **Korean：**
    * [yujineeee/clean-code-php](https://github.com/yujineeee/clean-code-php)
-* :tr: **Turkish:**
+* :tr: **Turkish：**
    * [anilozmen/clean-code-php](https://github.com/anilozmen/clean-code-php)
    
 **[⬆ 返回頂部](#目錄)**
